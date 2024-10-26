@@ -46,9 +46,6 @@ def main():
     wall1 = Wall(0, 1, board, 2, None, (255,255,255,255))
     level1.addGameObject(wall1)
 
-    wall2 = Wall(1, 0, board, 2, None, (255,255,255,255))
-    level1.addGameObject(wall2)
-
     game = Game(screenSize, "level1", 60, 120, pygame.FULLSCREEN, (255, 255, 255))
     game.run()
 
