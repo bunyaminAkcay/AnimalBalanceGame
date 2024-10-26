@@ -17,7 +17,7 @@ class Bar(SpriteObject):
         self.targetTag = targetTag
         self.maxBarSize = height
         self.scene = scene
-        self.allAnimalTags = ["Mouse", "Cat", "Dog"]
+        self.allAnimalTags = ["Animal.Mouse", "Animal.Cat", "Animal.Dog"]
         
         backgroundSprite = SpriteObject(x, y, width, height, -1, barImage)
         self.scene.addGameObject(backgroundSprite)
@@ -39,7 +39,7 @@ class Bar(SpriteObject):
         for j in range(boardSize[1]):
             for i in range(boardSize[0]):
                     if self.board.board[j][i] == None:
-                         continue
+                        continue
                     t = self.board.board[j][i].getTag()
                     if self.targetTag == t:
                         targetTagCount +=1
@@ -48,9 +48,9 @@ class Bar(SpriteObject):
                         totalAnimalCount +=1
                         
         
-        ratio = targetTagCount/totalAnimalCount
-        
-        self.height = self.maxBarSize * ratio
+        ratio = targetTagCount/(totalAnimalCount + 0.1)
+        print(ratio)
+        self.height = self.maxBarSize * ratio   
 
         self.y = self.initialY + self.maxBarSize - self.height
         self._updateScale(1)

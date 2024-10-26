@@ -11,7 +11,11 @@ class Cat(Animal):
         catImage = pygame.image.load(cat_image_path)
 
         super().__init__(boardX, boardY, boardObject, layer, catImage, (0, 0, 0, 0), visibility)
+        self.targetAnimalTag = "Animal.Mouse"
+        self.enemyAnimalTag = "Animal.Dog" 
 
     def init(self):
         super().init()
-        self.setTag("Cat")
+        self.setTag("Animal.Cat")
+
+    

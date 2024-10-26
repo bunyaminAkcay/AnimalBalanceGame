@@ -7,6 +7,7 @@ class Game:
     _gameInstance = None
     _scene = [None]
     _screenSize = [0,0]
+    mouseClicked = [False]
 
     def __new__(cls, *args, **kwargs):
         if cls._gameInstance is None:
@@ -33,6 +34,15 @@ class Game:
         self.__lastClockAccumulator = self.__globalClock.getAccumulator()
         self.__startingSceneName = sceneName
 
+
+
+
+
+
+
+
+
+
     def run(self):
         
         self.changeScene(self.__startingSceneName)
@@ -42,7 +52,11 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.__running = False
-
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left mouse button
+                    Game.mouseClicked[0] = True
+                else:
+                    Game.mouseClicked[0] = False
+            
             if(self.__loopFpsDeterminedByFps):
                 #fixed update
                 if(self.__globalClock.getAccumulator() - self.__lastClockAccumulator >= self.__oneOverFixedFps):

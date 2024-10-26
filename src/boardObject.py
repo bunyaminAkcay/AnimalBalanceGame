@@ -14,16 +14,22 @@ class BoardObject(SpriteObject):
         self.boardY = boardY
         super().__init__(x, y, width, height, layer, image, backgroundColor, visibility)
     
+    
 
     def go(self, boardX, boardY):
+        oldBoardX = self.boardX
+        oldBoardY = self.boardY
+
         self.boardX = boardX
         self.boardY = boardY
 
-        x = self.boardObject.boardPosition[0] + self.boardObject.squareSize * boardX
-        y = self.boardObject.boardPosition[1] + self.boardObject.squareSize * boardY
+        self.x = self.boardObject.boardPosition[0] + self.boardObject.squareSize * boardX
+        self.y = self.boardObject.boardPosition[1] + self.boardObject.squareSize * boardY
 
-        self.x = x
-        self.y = y
+        self.boardObject.board[oldBoardY][oldBoardX] = None
+        self.boardObject.board[boardY][boardX] = self
+
+
     
     def move():
         pass

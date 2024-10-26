@@ -64,19 +64,21 @@ def main():
     level1.addGameObject(wall1)
 
 
-    animalTagsInScene = ["Mouse", "Cat"]
+    animalTagsInScene = ["Animal.Mouse", "Animal.Cat"]
     barSpace = 100
     barPosition = 1600
     for i, tag in enumerate(animalTagsInScene):
-        bar = Bar(barPosition + i * barSpace, 100, 40, 250, 1, board, tag, level1, None)
+        bar = Bar(barPosition + i * barSpace, 100, 40, 250, 99, board, tag, level1, None)
             
         level1.addGameObject(bar)
 
-    game = Game(screenSize, "level1", 60, 120, pygame.FULLSCREEN, (255, 255, 255))
+    game = Game(screenSize, "level1", 60, 60, pygame.FULLSCREEN, (255, 255, 255))
     game.run()
 
-
+    
     pass
 
 
 main()
+
+

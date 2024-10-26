@@ -2,6 +2,7 @@ from animal import Animal
 import pygame
 import os
 
+
 class Mouse(Animal):
     def __init__(self, boardX, boardY, boardObject, layer,  visibility=True):
         base_path = os.path.dirname(__file__)
@@ -10,11 +11,12 @@ class Mouse(Animal):
         Mouse_Image = pygame.image.load(mouse_image_path)
 
         super().__init__(boardX, boardY, boardObject, layer, Mouse_Image,  visibility)
- 
- 
- 
- 
+        self.targetAnimalTag = ""
+        self.enemyAnimalTag = "Animal.Cat"
+        self.birthChance = 0.02
  
     def init(self):
         super().init()
-        self.setTag("Mouse")
+        self.setTag("Animal.Mouse")
+        
+        
