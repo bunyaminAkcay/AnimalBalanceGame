@@ -31,7 +31,7 @@ class Items(GameObject):
             scene.addGameObject(skillSprite)
             self.skillSprites.append(skillSprite)
 
-        self.skillBoxEffect = SpriteObject(xPosition - skillBoxSize[0] * 0.25, 0, skillBoxSize[0] * 1.5, skillBoxSize[1] * 1.5, 20, None, (255, 0, 0, 255))
+        self.skillBoxEffect = SpriteObject(xPosition , yPositon, skillBoxSize[0] , skillBoxSize[1] , 20, Items.getImage("Effect-1.png"), (0, 0, 0, 0))
         scene.addGameObject(self.skillBoxEffect)
         self.setSkillId(self.skillId)
 
@@ -45,7 +45,7 @@ class Items(GameObject):
         self.skillId = skillId
         y = self.yPosition + self.skillId * (self.space + self.skillBoxSize[1])
 
-        self.skillBoxEffect.y = y - self.skillBoxSize[0] * 0.25
+        self.skillBoxEffect.y = y 
 
     def getSkillId(self):
         return self.skillId

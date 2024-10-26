@@ -12,12 +12,13 @@ class Board(GameObject):
         self.boardPosition = boardPosition
         self.boardSize = boardSize
         self.board = [[None for _ in range(boardSize[0])] for _ in range(boardSize[1])]
-        self.clock = Clock(100)
+        self.clock = Clock(1000)
         self.scene = scene
         self.userWalls = []
         self.userWallCount = 10
         self.skillItems = skillItems
         self.holder = [None for _ in range(1)]
+        self.stop = False
 
 
     def checkInBoard(self, x, y):
@@ -32,7 +33,8 @@ class Board(GameObject):
         return (self.checkInBoard(coords[0], coords[1])), coords
 
     def update(self):
-        
+        if self.stop == True:
+            return
         mouse_pos = pygame.mouse.get_pos()
 
         if self.skillItems.getSkillId() == 0:

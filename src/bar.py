@@ -4,8 +4,6 @@ import pygame
 
 class Bar(SpriteObject):
 
-
-
     def __init__(self, x, y, width, height, layer, board, targetTag, scene,  visibility=True):
         base_path = os.path.dirname(__file__)
         bar_image_path = os.path.join(base_path, "..", "sprites", "Bar.png")
@@ -19,8 +17,19 @@ class Bar(SpriteObject):
         self.scene = scene
         self.allAnimalTags = ["Animal.Mouse", "Animal.Cat", "Animal.Dog"]
         
-        backgroundSprite = SpriteObject(x, y, width, height, -1, barImage)
-        self.scene.addGameObject(backgroundSprite)
+        self.backgroundSprite = SpriteObject(x, y, width, height, -25, barImage)
+        self.scene.addGameObject(self.backgroundSprite)
+
+        tagList = targetTag.split(".")
+
+        self.animalSprite = SpriteObject(x -12, y + height -40, 64, 64, -30, Bar.getImage(tagList[1] + ".png"))
+        self.scene.addGameObject(self.animalSprite)
+
+    @staticmethod
+    def getImage(filename):
+        base_path = os.path.dirname(__file__)
+        image_path = os.path.join(base_path, "..", "sprites", filename)
+        return pygame.image.load(image_path)
 
     def init(self):
         self.initialX = self.x
@@ -28,7 +37,9 @@ class Bar(SpriteObject):
     
 
     def update(self):
-        # boarddaki o tagdaki hayvanları say
+        if self.board.stop:
+            return
+        # boarddaki o tagdaki hayvanları sayself
         # board daki tüm hayvanları say
         # oranı bul
         # x, y, w, h değiştir

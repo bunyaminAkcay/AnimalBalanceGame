@@ -9,6 +9,9 @@ class UIText(UIObject):
         if not pygame.font.get_init():
             pygame.font.init()
         
+        self.fontBackground = fontBackground
+        self.fontColor = fontColor
+
         self.__font = pygame.font.Font(UIText.font[0], fontSize)
         if fontBackground == None:
             self.__text = self.__font.render(textString, True, fontColor)
@@ -24,3 +27,11 @@ class UIText(UIObject):
     @staticmethod
     def setFont(fontPath):
         UIText.font[0] = fontPath
+
+    def setText(self, textString):
+        if self.fontBackground == None:
+            self.__text = self.__font.render(textString, True, self.fontColor)
+        else:
+            self.__text = self.__font.render(textString, True, self.fontColor, self.fontBackground)
+
+        self.__textRect = self.__text.get_rect()
