@@ -30,3 +30,5 @@ class BoardObject(SpriteObject):
 
     def checkMove(self, x, y):
         return self.boardObject.checkInBoard(x, y)
+    
+    

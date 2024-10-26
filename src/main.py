@@ -3,15 +3,18 @@ import pygame
 from core.game import Game
 from core.scene import Scene
 from core.camera import Camera
+import os
 
 
 from box import Box
 from Board import Board
 from animal import Animal
 from wall import Wall
-def main():
+from cat import Cat
+from mouse import Mouse
+from bar import Bar
 
-    
+def main():
 
     screenSize = (1920, 1080)
 
@@ -20,10 +23,11 @@ def main():
     level1 = Scene("level1", level1Camera)
     level1.addGameObject(level1Camera)
 
-    squareSize = 80
-    boardSize = (5, 5)
+    squareSize = 64
+    boardSize = (17, 14)
 
     boardPosition = ( 420, 100)
+    
     
     for j in range(boardSize[1]):
         for i in range(boardSize[0]):
@@ -37,14 +41,33 @@ def main():
             b = Box(boxX, boxY, squareSize, squareSize, 10, None, color)
             level1.addGameObject(b)
     
-    board = Board(squareSize, boardPosition, boardSize)
+    board = Board(squareSize, boardPosition, boardSize, level1)
     level1.addGameObject(board)
 
-    animal = Animal(0, 0, board, 1, None, (0,0,0,255))
-    level1.addGameObject(animal)
+    cat1 = Cat(3, 3, board, 0)
+    level1.addGameObject(cat1)
+    
+    cat2 = Cat(3, 5, board, 0)
+    level1.addGameObject(cat2)
 
-    wall1 = Wall(0, 1, board, 2, None, (255,255,255,255))
+    mouse1= Mouse(3,6,board,0)
+    level1.addGameObject(mouse1)
+
+    mouse2= Mouse(3,0,board,0)
+    level1.addGameObject(mouse2)
+
+    wall1 = Wall(0, 1, board, 2)
     level1.addGameObject(wall1)
+
+
+    animalTagsInScene = ["Mouse", "Cat"]
+    barSpace = 100
+    barPosition = 1600
+    for i, tag in enumerate(animalTagsInScene):
+        bar = Bar(barPosition + i * barSpace, 100, 40, 250, 1, board, tag, level1, None)
+            
+        level1.addGameObject(bar)
+
 
     game = Game(screenSize, "level1", 60, 120, pygame.FULLSCREEN, (255, 255, 255))
     game.run()

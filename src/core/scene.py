@@ -29,6 +29,8 @@ class Scene:
             if inserted == False:
                 self.gameObjects.append(gameObject)
                 
+    def removeGameObject(self, gameObject):
+        self.gameObjects.remove(gameObject)
 
     def sortLayers(self):
         pass
