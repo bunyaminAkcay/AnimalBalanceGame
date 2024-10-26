@@ -13,11 +13,12 @@ from wall import Wall
 from cat import Cat
 from mouse import Mouse
 from bar import Bar
+from skillBox import SkillBox
+from items import Items
 
 def main():
 
     screenSize = (1920, 1080)
-
 
     level1Camera = Camera( screenSize[0]//2, screenSize[1]//2, 1) 
     level1 = Scene("level1", level1Camera)
@@ -41,7 +42,10 @@ def main():
             b = Box(boxX, boxY, squareSize, squareSize, 10, None, color)
             level1.addGameObject(b)
     
-    board = Board(squareSize, boardPosition, boardSize, level1)
+    items = Items(100,50, (192, 192), 0, level1)
+    level1.addGameObject(items)
+
+    board = Board(squareSize, boardPosition, boardSize, level1, items)
     level1.addGameObject(board)
 
     cat1 = Cat(3, 3, board, 0)
@@ -67,7 +71,6 @@ def main():
         bar = Bar(barPosition + i * barSpace, 100, 40, 250, 1, board, tag, level1, None)
             
         level1.addGameObject(bar)
-
 
     game = Game(screenSize, "level1", 60, 120, pygame.FULLSCREEN, (255, 255, 255))
     game.run()

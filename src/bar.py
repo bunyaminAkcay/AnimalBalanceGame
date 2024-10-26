@@ -12,14 +12,14 @@ class Bar(SpriteObject):
             
         barImage = pygame.image.load(bar_image_path)
 
-        super().__init__(x, y, width, height, layer, None, (0,0,0,0), visibility)
+        super().__init__(x, y, width, height, layer, None, (255,0,0,255), visibility)
         self.board = board
         self.targetTag = targetTag
         self.maxBarSize = height
         self.scene = scene
         self.allAnimalTags = ["Mouse", "Cat", "Dog"]
         
-        backgroundSprite = SpriteObject(x, y, width, height, -1, barImage, (255, 0, 0, 255))
+        backgroundSprite = SpriteObject(x, y, width, height, -1, barImage)
         self.scene.addGameObject(backgroundSprite)
 
     def init(self):
@@ -47,9 +47,8 @@ class Bar(SpriteObject):
                     elif t in self.allAnimalTags:
                         totalAnimalCount +=1
                         
-        print("deneme")
-        ratio = targetTagCount/totalAnimalCount
         
+        ratio = targetTagCount/totalAnimalCount
         
         self.height = self.maxBarSize * ratio
 

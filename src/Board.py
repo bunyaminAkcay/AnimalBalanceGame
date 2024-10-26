@@ -1,9 +1,12 @@
 from core.gameObject import GameObject
 from core.clock import Clock
+import pygame
+from wall import Wall
 
 class Board(GameObject):
+ class MouseEventHandler:
 
-    def __init__(self, squareSize, boardPosition, boardSize, scene):
+    def __init__(self, squareSize, boardPosition, boardSize, scene, skillItems):
         super().__init__()
         self.squareSize = squareSize
         self.boardPosition = boardPosition
@@ -13,14 +16,50 @@ class Board(GameObject):
         self.scene = scene
         self.userWallLocations = []
         self.userWallCount = 10
+        self.skillItems = skillItems
+        self.holder = None
 
     def checkInBoard(self, x, y):
-        print(x, " ", y)
         if self.boardSize[0] > x >= 0 and self.boardSize[1] > y >= 0:
             return True
         return False
 
     def update(self):
+        #skill 0: hand
+
+
+        #if self.skillItems.getSkillId() == 0:
+
+# Mouse event handler sınıfı
+        def _init_(self):
+            self.dragging = None
+            self.offset_x = 0
+            self.offset_y = 0
+
+        def handle_event(self, event, game_objects):
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for obj in game_objects:
+                    if isinstance(obj, Wall) and obj.rect.collidepoint(event.pos):
+                    # Wall nesnesi sürüklenmeye başlar
+                        self.dragging = obj
+                        mouse_x, mouse_y = event.pos
+                        self.offset_x = obj.rect.x - mouse_x
+                        self.offset_y = obj.rect.y - mouse_y
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+            # Fare bırakıldığında sürüklemeyi durdur
+                self.dragging = None
+
+            elif event.type == pygame.MOUSEMOTION:
+            # Sürükleme işlemi
+                if self.dragging:
+                    mouse_x, mouse_y = event.pos
+                    self.dragging.rect.x = mouse_x + self.offset_x
+                    self.dragging.rect.y = mouse_y + self.offset_y
+                    self.dragging.update_position()
+
+            
+
         if self.clock.getTicks() > 0:
 
             for y, row in enumerate(self.board):
