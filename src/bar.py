@@ -16,7 +16,7 @@ class Bar(SpriteObject):
         self.targetTag = targetTag
         self.maxBarSize = height
         self.scene = scene
-        self.allAnimalTags = ["Animal.Mouse", "Animal.Cat", "Animal.Dog"]
+        self.allAnimalTags = ["Animal.Mouse", "Animal.Cat", "Animal.Dog", "Animal.Frog", "Animal.Snake", "Animal.Eagle"]
         self.ratio = 0.5
         
         self.backgroundSprite = SpriteObject(x, y, width, height, -25, barImage)

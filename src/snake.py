@@ -13,7 +13,7 @@ class Snake(Animal):
         super().__init__(boardX, boardY, boardObject, layer, catImage, (0, 0, 0, 0), visibility)
         self.targetAnimalTag = "Animal.Frog"
         self.enemyAnimalTag = "Animal.Eagle" 
-        self.birthChance = 0.04
+        self.birthChance = 0.03
 
     def init(self):
         super().init()

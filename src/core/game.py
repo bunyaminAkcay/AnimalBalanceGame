@@ -2,6 +2,9 @@ import pygame
 from .scene import Scene
 from .transform import Transform
 from .globalClock import GlobalClock
+
+import os
+
 class Game:
 
     _gameInstance = None
@@ -22,6 +25,14 @@ class Game:
         Game._screenSize[0] = screenSize[0]
         Game._screenSize[1] = screenSize[1]
         self.__screen = pygame.display.set_mode(screenSize, screenFlag)
+
+        base_path = os.path.dirname(__file__)
+        path = os.path.join(base_path, "..", "..", "sprites", "sippypop.ogg")
+
+        pygame.mixer.init()
+        pygame.mixer.music.load(path)
+        pygame.mixer.music.play(500)
+
         self.__fps = maxFps
         self.__oneOverFps = 1000/float(maxFps)
         self.__fixedFps = maxFixedFps

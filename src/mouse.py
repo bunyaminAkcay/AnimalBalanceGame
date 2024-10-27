@@ -13,7 +13,7 @@ class Mouse(Animal):
         super().__init__(boardX, boardY, boardObject, layer, Mouse_Image,  visibility)
         self.targetAnimalTag = "Animal.Nothing"
         self.enemyAnimalTag = "Animal.Cat"
-        self.birthChance = 0.05
+        self.birthChance = 0.04
  
     def init(self):
         super().init()

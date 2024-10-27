@@ -40,13 +40,13 @@ class ResultScreen(GameObject):
         self.scene.addGameObject(self.buttonNextlevel)
         self.buttonNextlevel.visibility=False
         
-        self.GameWin=UIText("YOU WIN!",880,700,32,-50,(255,255,255,255))
-        self.GameWin.visibility=False
+        self.GameWin=UIText("",880,700,32,-50,(255,255,255,255))
+        self.GameWin.visibility = False
         self.scene.addGameObject(self.GameWin)
         
-        self.GameOver=UIText("YOU LOST!",880,700,32,-50,(255,255,255,255))
-        self.GameOver.visibility=False
-        self.scene.addGameObject(self.GameOver)
+        #self.GameOver=UIText("YOU LOST!",880,700,32,-50,(255,255,255,255))
+        #self.GameOver.visibility=False
+        #self.scene.addGameObject(self.GameOver)
        
         #UIText
         super().__init__()
@@ -119,13 +119,14 @@ class ResultScreen(GameObject):
         for bar in self.bars:
             if bar.ratio <= 0:
                 everyAnimalExist = False 
+                break
 
         if everyAnimalExist:
-            self.GameWin.visibility=True
-            
-            
+            self.GameWin.setText("You win!")
         else:
-            self.GameOver.visibility=True
+            self.GameWin.setText("You lost!")
+            
+            
           
             #lose
             
@@ -156,10 +157,10 @@ class ReloadButton(Button):
             lvl1 = level1.getLevel1()
         if self.levelTag == "level2":
             import level2
-            lvl2 = level2.getLevel1()
+            lvl2 = level2.getLevel2()
         if self.levelTag == "level3":
             import level3
-            lvl3 = level3.getLevel1()
+            lvl3 = level3.getLevel3()
 
         Game.changeScene(self.levelTag)
 

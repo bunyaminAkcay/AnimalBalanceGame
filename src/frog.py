@@ -13,7 +13,7 @@ class Frog(Animal):
         super().__init__(boardX, boardY, boardObject, layer, catImage, (0, 0, 0, 0), visibility)
         self.targetAnimalTag = "Animal.Nothing"
         self.enemyAnimalTag = "Animal.Snake" 
-        self.birthChance = 0.05
+        self.birthChance = 0.04
 
     def init(self):
         super().init()

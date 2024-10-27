@@ -13,7 +13,7 @@ class Cat(Animal):
         super().__init__(boardX, boardY, boardObject, layer, catImage, (0, 0, 0, 0), visibility)
         self.targetAnimalTag = "Animal.Mouse"
         self.enemyAnimalTag = "Animal.Dog" 
-        self.birthChance = 0.05
+        self.birthChance = 0.03
 
     def init(self):
         super().init()

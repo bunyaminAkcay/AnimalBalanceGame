@@ -53,7 +53,7 @@ class Clock2(GameObject):
 
     def __init__(self):
         super().__init__()
-        self.clock = Clock(25000)
+        self.clock = Clock(1000)
 
     def update(self):
         if self.clock.getTicks() > 0:

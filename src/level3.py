@@ -13,6 +13,7 @@ from Board import Board
 from animal import Animal
 from wall import Wall
 from cat import Cat
+from dog import Dog
 from mouse import Mouse
 from bar import Bar
 from skillBox import SkillBox
@@ -31,15 +32,15 @@ def getLevel3():
     screenSize = (1920, 1080)
 
     level1Camera = Camera( screenSize[0]//2, screenSize[1]//2, 1) 
-    level1 = Scene("level1", level1Camera, (34,32,52))
+    level1 = Scene("level3", level1Camera, (34,32,52))
     level1.addGameObject(level1Camera)
 
     squareSize = 64
-    boardSize = (18, 16)
+    boardSize = (16, 12)
 
-    boardPosition = ( 364, 25)
+    boardPosition = ( 450, 200)
         
-    room = Box(boardPosition[0] -64, boardPosition[1] -64, 1344, 1152, 10, getImage("Room1.png"), (0,0,0,0))
+    room = Box(boardPosition[0] -64, boardPosition[1] -64, 576*2, 448 *2, 10, getImage("Final-Lab.png"), (0,0,0,0))
     level1.addGameObject(room)
     
     items = Items(100,50, (192, 192), 0, level1)
@@ -47,32 +48,35 @@ def getLevel3():
 
     board = Board(squareSize, boardPosition, boardSize, level1, items)
     level1.addGameObject(board)
-
-    cat1 = Cat(13, 2, board, 0)
-    level1.addGameObject(cat1)
     
-    cat2 = Cat(5, 13, board, 0)
-    level1.addGameObject(cat2)
-
-    mouse1= Mouse(5,2,board,0)
+    mouse1= Mouse(15,1,board,0)
     level1.addGameObject(mouse1)
 
-    mouse2= Mouse(13,13,board,0)
+    mouse2= Mouse(15,2,board,0)
     level1.addGameObject(mouse2)
 
+    mouse1= Cat(0,4,board,0)
+    level1.addGameObject(mouse1)
+
+    mouse2= Cat(0,5,board,0)
+    level1.addGameObject(mouse2)
+
+    dog1 = Dog(15,8,board,0)
+    level1.addGameObject(dog1)
+
+    dog2 = Dog(15,9,board,0)
+    level1.addGameObject(dog2)
 
 
-    wallLocations = [(2,4), (3,4), (4,4), (5,4), (2, 5), (3, 5), (4, 5), (5,5),
-                     (13,4), (14,4), (15,4), (16,4),(13,5), (14,5), (15,5), (16,5),
-                     (2,10), (3,10), (4,10), (5,10), (2, 11), (3, 11), (4, 11), (5,11),
-                     (13,10), (14,10), (15,10), (16,10),(13,11), (14,11), (15,11), (16,11)]
+    wallLocations = [(2,4),(3,4),(4,4),(5,4),(6,4),(7,4),(8,4),(9,4),(10,4),(11,4),(12,4),(13,4),(14,4),(15,4),
+                     (2,5),(3,5),(4,5),(5,5),(6,5),(7,5),(8,5),(9,5),(10,5),(11,5),(12,5),(13,5),(14,5),(15,5)]
 
     for wallLoc in wallLocations:        
         wall = Wall(wallLoc[0], wallLoc[1], board, 2)
         wall.visibility = False
         level1.addGameObject(wall)
 
-    animalTagsInScene = ["Animal.Mouse", "Animal.Cat"]
+    animalTagsInScene = ["Animal.Mouse", "Animal.Cat", "Animal.Dog"]
     barSpace = 100
     barPosition = 1650
     barHeigth = 250
@@ -88,7 +92,7 @@ def getLevel3():
         level1.addGameObject(bar)
         barObjects.append(bar)
 
-    balanceLine = SpriteObject(barPosition - 20, 100 + barHeigth * (len(animalTagsInScene)-1)/len(animalTagsInScene), 180, 5, -35, None, (0, 255, 0, 255))
+    balanceLine = SpriteObject(barPosition - 20, 100 + barHeigth * (len(animalTagsInScene)-1)/len(animalTagsInScene), 280, 5, -35, None, (0, 255, 0, 255))
     level1.addGameObject(balanceLine)
 
     resultScreen = ResultScreen(barObjects, (-820, 230), len(animalTagsInScene), balanceLine,level1, "level1")
