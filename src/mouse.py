@@ -11,7 +11,7 @@ class Mouse(Animal):
         Mouse_Image = pygame.image.load(mouse_image_path)
 
         super().__init__(boardX, boardY, boardObject, layer, Mouse_Image,  visibility)
-        self.targetAnimalTag = ""
+        self.targetAnimalTag = "Animal.Nothing"
         self.enemyAnimalTag = "Animal.Cat"
         self.birthChance = 0.05
  

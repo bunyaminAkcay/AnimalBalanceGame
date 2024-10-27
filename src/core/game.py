@@ -7,6 +7,7 @@ class Game:
     _gameInstance = None
     _scene = [None]
     _screenSize = [0,0]
+
     mouseClicked = [False]
 
     def __new__(cls, *args, **kwargs):
@@ -33,14 +34,6 @@ class Game:
         self.__globalClock = GlobalClock()
         self.__lastClockAccumulator = self.__globalClock.getAccumulator()
         self.__startingSceneName = sceneName
-
-
-
-
-
-
-
-
 
 
     def run(self):
@@ -75,7 +68,7 @@ class Game:
             self.__globalClock.tick(self.__loopFps)
     
     def __gameLoop(self):
-        self.__screen.fill(self.__backgroundColor)
+        self.__screen.fill(self.getScene().sceneBackgroud)
         
         for gameObject in self.getScene().gameObjects:
             gameObject.update()

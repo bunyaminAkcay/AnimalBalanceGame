@@ -15,6 +15,14 @@ class Animal(BoardObject):
 
         possibleWays = [ (1, 0), (-1,0), (0, 1), (0,-1)]
         possibleWay = None
+
+        yemLocation = None
+        for way in possibleWays:
+            if self.checkYem(initialPosition[0] + way[0], initialPosition[1] + way[1]):
+                yemLocation = (initialPosition[0] + way[0], initialPosition[1] + way[1])
+                break
+        
+
         while(len(possibleWays) != 0):
 
             possibleWayIndex = random.randint(0, len(possibleWays) -1)
@@ -43,7 +51,12 @@ class Animal(BoardObject):
             targetAnimal.x = -100
             self.boardObject.board[self.boardY + possibleWay[1]][self.boardX + possibleWay[0]] = None
 
-        self.go(self.boardX + possibleWay[0], self.boardY + possibleWay[1])
+        if(yemLocation != None):
+            self.boardObject.board[yemLocation[1]][yemLocation[0]].x = -100
+            self.boardObject.board[yemLocation[1]][yemLocation[0]] = None
+            self.go(yemLocation[0], yemLocation[1])
+        else:
+            self.go(self.boardX + possibleWay[0], self.boardY + possibleWay[1])
 
         randomNumber = random.random()
         if possibleWay != (0, 0) and randomNumber > (1-self.birthChance):
@@ -61,7 +74,7 @@ class Animal(BoardObject):
     def checkMove(self, x, y):
         inBoard = self.boardObject.checkInBoard(x, y)
         isWall = False
-        if inBoard and self.boardObject.board[y][x] != None and self.boardObject.board[y][x].getTag()  in ["Wall", "UserWall"]:
+        if inBoard and self.boardObject.board[y][x] != None and self.boardObject.board[y][x].getTag() in ["Wall", "UserWall", "Kafes"]:
             isWall = True
 
         if self.checkTarget(x,y):
@@ -82,5 +95,11 @@ class Animal(BoardObject):
     
         inBoard = self.boardObject.checkInBoard(x, y)
         if inBoard and self.boardObject.board[y][x] != None and self.boardObject.board[y][x].getTag() == self.targetAnimalTag:
+            return True
+        return False
+    
+    def checkYem(self, x, y):
+        inBoard = self.boardObject.checkInBoard(x, y)
+        if inBoard and self.boardObject.board[y][x] != None and self.boardObject.board[y][x].getTag() == "Yem":
             return True
         return False

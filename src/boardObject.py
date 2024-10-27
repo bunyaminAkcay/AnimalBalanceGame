@@ -17,6 +17,14 @@ class BoardObject(SpriteObject):
     
 
     def go(self, boardX, boardY):
+        
+        #zehir
+        if self.boardObject.board[boardY][boardX] != None and self.boardObject.board[boardY][boardX].getTag() == "Posion":
+            print("zehir")
+            self.boardObject.board[self.boardY][self.boardX] = None
+            self.x = -100
+            return
+
         oldBoardX = self.boardX
         oldBoardY = self.boardY
 

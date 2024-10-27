@@ -3,12 +3,13 @@ class Scene:
     
     _sceneDictionary = {}
 
-    def __init__(self, name : str, mainCamera : Camera, gameObjects = []):
-        self.gameObjects = gameObjects
+    def __init__(self, name : str, mainCamera : Camera, sceneBackgroud = (0,0,0)):
+        self.gameObjects = []
         self.__name = name
         self._sceneDictionary[name] = self
         self.mainCamera = mainCamera
         self.__gameObjectsInitialized = False
+        self.sceneBackgroud = sceneBackgroud
         
     def addGameObject(self, gameObject):
         if gameObject._drawable == False:

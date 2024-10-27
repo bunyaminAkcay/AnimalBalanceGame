@@ -19,6 +19,7 @@ class Board(GameObject):
         self.skillItems = skillItems
         self.holder = [None for _ in range(1)]
         self.stop = False
+        self.kafesLocation = None
 
 
     def checkInBoard(self, x, y):
@@ -47,7 +48,7 @@ class Board(GameObject):
                 self.holder[0].visibility = False
 
                       
-        if Game.mouseClicked[0]:
+        if pygame.mouse.get_pressed()[0]:
             Game.mouseClicked[0] = False
             # Get mouse position
             
@@ -76,6 +77,19 @@ class Board(GameObject):
                 elif self.skillItems.getSkillId() == 1:
                     if(isInBoard):
                         self.addUserWall(coord[0], coord[1])
+                #yem
+                elif self.skillItems.getSkillId() == 2:
+                    if(isInBoard):
+                        self.addYem(coord[0], coord[1])
+                #zehir
+                elif self.skillItems.getSkillId() == 3:
+                    if(isInBoard):
+                        self.addPosion(coord[0], coord[1])
+                #kafes
+                elif self.skillItems.getSkillId() == 4:
+                    if(isInBoard):
+                        self.addKafes(coord[0], coord[1])
+                        
         
 
         if self.clock.getTicks() > 0:
@@ -114,4 +128,36 @@ class Board(GameObject):
         self.userWalls = [x for x in self.userWalls if x is not None]
 
         return True
+        
+
+    def addYem(self, x ,y):
+        from yem import Yem
+        if self.board[y][x] != None:
+            return False
+        
+        yem = Yem(x, y, self, 0)
+        self.scene.addGameObject(yem)
+        self.board[y][x] = yem
+        yem.use()
+    
+    def addPosion(self, x ,y):
+        from posion import Posion
+        if self.board[y][x] != None:
+            return False
+        
+        posion = Posion(x, y, self, 0)
+        self.scene.addGameObject(posion)
+        self.board[y][x] = posion
+        posion.use()
+
+    def addKafes(self, x ,y):
+        from kafes import Kafes
+        if self.board[y][x] == None:
+            return False
+        
+        kafes = Kafes(x, y, self, -3)
+        self.scene.addGameObject(kafes)
+        self.board[y][x] = kafes
+        kafes.use()
+
         

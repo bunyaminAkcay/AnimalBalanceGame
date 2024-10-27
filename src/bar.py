@@ -2,6 +2,7 @@ from core.spriteObject import SpriteObject
 import os
 import pygame
 
+
 class Bar(SpriteObject):
 
     def __init__(self, x, y, width, height, layer, board, targetTag, scene,  visibility=True):
@@ -16,6 +17,7 @@ class Bar(SpriteObject):
         self.maxBarSize = height
         self.scene = scene
         self.allAnimalTags = ["Animal.Mouse", "Animal.Cat", "Animal.Dog"]
+        self.ratio = 0.5
         
         self.backgroundSprite = SpriteObject(x, y, width, height, -25, barImage)
         self.scene.addGameObject(self.backgroundSprite)
@@ -59,10 +61,34 @@ class Bar(SpriteObject):
                         totalAnimalCount +=1
                         
         
-        ratio = targetTagCount/(totalAnimalCount + 0.1)
-        print(ratio)
+        self.ratio = targetTagCount/(totalAnimalCount + 0.0001)
+        self.changeHeightByRatio(self.ratio)
+        
+    
+    def changeHeightByRatio(self, ratio):
         self.height = self.maxBarSize * ratio   
 
         self.y = self.initialY + self.maxBarSize - self.height
         self._updateScale(1)
-             
+
+    #get close %5 ratio to ratio and give a ceza point
+    def reduceToBalance( self, wantedRatio, barCount):
+        adjustment = 0.01  # Smaller adjustment step to move gradually toward the target ratio
+        
+        if self.ratio - wantedRatio >= adjustment:
+            self.ratio -= adjustment
+            penalty = adjustment * 1000
+        elif wantedRatio - self.ratio >= adjustment:
+            self.ratio += adjustment
+            penalty = adjustment * 1000
+        else:
+            # Set ratio exactly to target once within range
+            self.ratio = wantedRatio
+            penalty = abs(self.ratio - wantedRatio) * 1000
+            self.changeHeightByRatio(self.ratio)
+            return True, penalty
+        
+        penalty *= barCount
+        # Update height based on the adjusted ratio
+        self.changeHeightByRatio(self.ratio)
+        return False, penalty
